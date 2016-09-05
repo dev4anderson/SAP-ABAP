@@ -1,0 +1,67 @@
+FORM f_alv_refresh .
+
+  DATA:
+    l_scroll_row_no   TYPE lvc_s_roid,
+    l_scroll_row_info TYPE lvc_s_row,
+    l_scroll_col_info TYPE lvc_s_col,
+    l_cell_row_no TYPE lvc_s_roid,
+    l_cell_row_id TYPE lvc_s_row,
+    l_cell_col_id TYPE lvc_s_col,
+
+    mt_sel_cells TYPE lvc_t_ceno,
+    mt_sel_rows  TYPE lvc_t_row.
+
+  g_grid->get_scroll_info_via_id(
+  IMPORTING
+  es_row_no   = l_scroll_row_no
+  es_row_info = l_scroll_row_info
+  es_col_info = l_scroll_col_info
+  ).
+
+  g_grid->get_current_cell(
+  IMPORTING
+  es_row_id = l_cell_row_id
+  es_col_id = l_cell_col_id
+  es_row_no = l_cell_row_no
+  ).
+
+  g_grid->get_selected_rows(
+  IMPORTING
+  et_index_rows = mt_sel_rows
+  ).
+
+  IF mt_sel_rows[] IS INITIAL.
+    g_grid->get_selected_cells_id(
+      IMPORTING
+        et_cells = mt_sel_cells
+    ).
+  ENDIF.
+
+  PERFORM f_seleciona_dados.
+  PERFORM f_ajusta_status.
+
+  g_grid->refresh_table_display( i_soft_refresh = 'X' ).
+
+* Restore the saved selection
+  IF mt_sel_cells[] IS NOT INITIAL.
+    g_grid->set_selected_cells_id( it_cells = mt_sel_cells   ).
+  ELSE.
+    g_grid->set_selected_rows(
+      it_index_rows            = mt_sel_rows
+    ).
+  ENDIF.
+
+* Restore previously saved scroll position
+  g_grid->set_scroll_info_via_id(
+    is_row_info = l_scroll_row_info
+    is_col_info = l_scroll_col_info
+    is_row_no   = l_scroll_row_no
+  ).
+
+* Set focus on previously selected cell
+  g_grid->set_current_cell_via_id(
+    is_row_id    = l_cell_row_id
+    is_column_id = l_cell_col_id
+    is_row_no    = l_cell_row_no ).
+
+ENDFORM.                    " F_ALV_REFRESH
