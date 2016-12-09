@@ -1,0 +1,536 @@
+class ZCL_UTIL_EMPLOYEES definition
+  public
+  create public .
+
+public section.
+
+  data MO_PD_OM type ref to ZCL_UTIL_PD_OM .
+
+  interface IF_HRBAS_CONSTANTS load .
+  methods READ_INFOTYPE
+    importing
+      !IV_PERNR type ANY
+      !IV_BEGDA type ANY default IF_HRBAS_CONSTANTS=>LOW_DATE
+      !IV_ENDDA type ANY default IF_HRBAS_CONSTANTS=>HIGH_DATE
+      !IV_INFTY type PRELP-INFTY
+      !IV_TCLAS type PSPAR-TCLAS default 'A'
+    changing
+      !CT_PNNNN type STANDARD TABLE .
+  methods INFOTYPE_OPERATION
+    importing
+      !IV_INFTY type INFTY
+      !IV_ACTIO type ACTIO
+      !IS_PNNNN type ANY
+      !IV_NOCOMMIT type BAPI_STAND-NO_COMMIT optional
+      !IS_PSKEY type PSKEY optional
+      !IS_SECONDARY type ANY optional
+      !IV_VIEKN type VIEKN optional
+      !IV_NO_BLOCK type CHAR1 optional
+      !IV_TCLAS type PSPAR-TCLAS default 'B'
+      !IV_DIALOG_MODE type C default '0'
+      !IS_PROP type PES_PPROP optional
+    changing
+      !ES_RETURN type BAPIRETURN1 optional .
+  methods GET_PERNR_FROM_USERID
+    importing
+      !IV_USERID type P0105-USRID
+      !IV_USRTY type P0105-USRTY default '001'
+      !IV_BEGDA type P0105-BEGDA default IF_HRBAS_CONSTANTS=>LOW_DATE
+      !IV_ENDDA type P0105-ENDDA default IF_HRBAS_CONSTANTS=>HIGH_DATE
+    returning
+      value(RV_PERNR) type P0105-PERNR .
+  methods GET_EMPLOYEE_DATA
+    importing
+      !IV_PERNR type PERNR_D
+      !IV_DATE type DATUM default SY-DATUM
+    returning
+      value(RS_PERSON) type PERSON .
+  methods GET_MAIL
+    importing
+      !IV_PERNR type PERNR_D
+      !IV_SUBTY type SUBTY default '0010'
+      !IV_DATE type DATUM default SY-DATUM
+    returning
+      value(RV_EMAIL) type COMM_ID_LONG .
+  methods GET_CONTRACT_DATA
+    importing
+      !IV_PERNR type PERNR_D
+      !IV_DATE type DATUM
+    returning
+      value(RS_9500) type P9500 .
+  methods CONSTRUCTOR .
+  methods GET_0041_DATE
+    importing
+      !IV_PERNR type PERNR_D
+      !IV_DATE type DATUM default SY-DATUM
+      !IV_DATAR type DATAR
+    returning
+      value(RV_DATE) type DARDT .
+  methods GET_INFOTYPE_FIELD_VALUE
+    importing
+      !IV_PERNR type ANY
+      !IV_DATE type DATUM default SY-DATUM
+      !IV_INFTY type PRELP-INFTY
+      !IV_SUBTY type PRELP-SUBTY optional
+      !IV_TCLAS type PSPAR-TCLAS default 'A'
+      !IV_FIELDNAME type FIELDNAME
+    exporting
+      value(EV_FIELDVALUE) type ANY .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_UTIL_EMPLOYEES IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD constructor.
+
+    mo_pd_om = NEW zcl_util_pd_om( ).
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->GET_0041_DATE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PERNR                       TYPE        PERNR_D
+* | [--->] IV_DATE                        TYPE        DATUM (default =SY-DATUM)
+* | [--->] IV_DATAR                       TYPE        DATAR
+* | [<-()] RV_DATE                        TYPE        DARDT
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_0041_date.
+    DATA: l_estrut    TYPE char05.
+
+    FIELD-SYMBOLS:
+      <tab>   TYPE STANDARD TABLE,
+      <wa>    TYPE any,
+      <value> TYPE any.
+    DATA: lt_comp TYPE cl_abap_structdescr=>component_table.
+    DATA: lo_data TYPE REF TO data.
+    DATA: lo_new_tab  TYPE REF TO cl_abap_tabledescr,
+          lo_new_type TYPE REF TO cl_abap_structdescr,
+          lo_struct   TYPE REF TO cl_abap_structdescr.
+
+
+    l_estrut = 'P0041'.
+
+    IF NOT l_estrut IS INITIAL.
+      lo_struct  ?= cl_abap_typedescr=>describe_by_name( l_estrut ).
+      lt_comp     = lo_struct->get_components( ).
+*   Tipo
+      lo_new_type = cl_abap_structdescr=>create( lt_comp ).
+    ENDIF.
+
+
+    IF NOT lt_comp IS INITIAL.
+*   Tipo
+      lo_new_type = cl_abap_structdescr=>create( lt_comp ).
+*   Tabela
+      lo_new_tab =  cl_abap_tabledescr=>create(
+                   p_line_type  = lo_new_type
+                   p_table_kind = cl_abap_tabledescr=>tablekind_std
+                   p_unique     = abap_false ).
+
+    ENDIF.
+
+* 5. data to handle the new table type
+    CLEAR lo_data.
+    CREATE DATA lo_data TYPE HANDLE lo_new_tab.
+    ASSIGN lo_data->* TO <tab>.
+
+** Create dynamically structure
+    CLEAR lo_data.
+    CREATE DATA lo_data TYPE HANDLE lo_new_type.
+    ASSIGN lo_data->* TO <wa>.
+
+    read_infotype( EXPORTING iv_pernr = iv_pernr
+                             iv_begda = iv_date
+                             iv_endda = iv_date
+                             iv_infty = '0041'
+                             iv_tclas = 'A'
+                   CHANGING  ct_pnnnn   = <tab> ).
+
+    CLEAR <wa>.
+    READ TABLE <tab>  INTO <wa> INDEX 1.
+    CHECK sy-subrc IS INITIAL.
+
+    LOOP AT lo_struct->get_ddic_field_list( ) INTO DATA(el_fields).
+      CHECK el_fields-fieldname(3) = 'DAR'.
+      ASSIGN COMPONENT el_fields-fieldname OF STRUCTURE <wa> TO <value>.
+      IF <value> = iv_datar.
+        DATA(vl_fieldname) = 'DAT' &&  el_fields-fieldname+3(2).
+        ASSIGN COMPONENT vl_fieldname OF STRUCTURE <wa> TO <value>.
+        rv_date = <value>.
+        EXIT.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->GET_CONTRACT_DATA
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PERNR                       TYPE        PERNR_D
+* | [--->] IV_DATE                        TYPE        DATUM
+* | [<-()] RS_9500                        TYPE        P9500
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_contract_data.
+
+    DATA: tl_9005 TYPE TABLE OF p9005,
+          tl_9500 TYPE TABLE OF p9500.
+*  Intotipo de contratos PA
+    read_infotype(
+         EXPORTING
+           iv_pernr = iv_pernr
+           iv_begda = iv_date
+           iv_endda = iv_date
+           iv_infty = '9005'
+         CHANGING
+           ct_pnnnn = tl_9005
+              ).
+
+    TRY .
+        mo_pd_om->read_infty( EXPORTING
+                                   iv_otype = 'ZC'
+                                   iv_objid = tl_9005[ subty = '0001' ]-objid
+                                   iv_infty = '9500'
+                                 CHANGING
+                                   ct_innnn = tl_9500[] ).
+
+        rs_9500 = tl_9500[ 1 ].
+      CATCH  cx_sy_itab_line_not_found.
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->GET_EMPLOYEE_DATA
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PERNR                       TYPE        PERNR_D
+* | [--->] IV_DATE                        TYPE        DATUM (default =SY-DATUM)
+* | [<-()] RS_PERSON                      TYPE        PERSON
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_employee_data.
+
+    CALL FUNCTION 'HR_GET_EMPLOYEE_DATA'
+      EXPORTING
+        person_id             = iv_pernr
+        selection_begin       = iv_date
+        selection_end         = iv_date
+      IMPORTING
+        personal_data         = rs_person
+      EXCEPTIONS
+        person_not_found      = 1
+        no_active_integration = 2.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->GET_INFOTYPE_FIELD_VALUE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PERNR                       TYPE        ANY
+* | [--->] IV_DATE                        TYPE        DATUM (default =SY-DATUM)
+* | [--->] IV_INFTY                       TYPE        PRELP-INFTY
+* | [--->] IV_SUBTY                       TYPE        PRELP-SUBTY(optional)
+* | [--->] IV_TCLAS                       TYPE        PSPAR-TCLAS (default ='A')
+* | [--->] IV_FIELDNAME                   TYPE        FIELDNAME
+* | [<---] EV_FIELDVALUE                  TYPE        ANY
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_infotype_field_value.
+    DATA: l_estrut    TYPE char05.
+
+    FIELD-SYMBOLS:
+      <tab>   TYPE STANDARD TABLE,
+      <wa>    TYPE any,
+      <value> TYPE any.
+    DATA: lt_comp TYPE cl_abap_structdescr=>component_table.
+    DATA: lo_data TYPE REF TO data.
+    DATA: lo_new_tab  TYPE REF TO cl_abap_tabledescr,
+          lo_new_type TYPE REF TO cl_abap_structdescr,
+          lo_struct   TYPE REF TO cl_abap_structdescr.
+
+
+    CONCATENATE 'P' iv_infty INTO l_estrut.
+
+    IF NOT l_estrut IS INITIAL.
+      lo_struct  ?= cl_abap_typedescr=>describe_by_name( l_estrut ).
+      lt_comp     = lo_struct->get_components( ).
+*   Tipo
+      lo_new_type = cl_abap_structdescr=>create( lt_comp ).
+    ENDIF.
+
+
+    IF NOT lt_comp IS INITIAL.
+*   Tipo
+      lo_new_type = cl_abap_structdescr=>create( lt_comp ).
+*   Tabela
+      lo_new_tab =  cl_abap_tabledescr=>create(
+                   p_line_type  = lo_new_type
+                   p_table_kind = cl_abap_tabledescr=>tablekind_std
+                   p_unique     = abap_false ).
+
+    ENDIF.
+
+* 5. data to handle the new table type
+    CLEAR lo_data.
+    CREATE DATA lo_data TYPE HANDLE lo_new_tab.
+    ASSIGN lo_data->* TO <tab>.
+
+** Create dynamically structure
+    CLEAR lo_data.
+    CREATE DATA lo_data TYPE HANDLE lo_new_type.
+    ASSIGN lo_data->* TO <wa>.
+
+    read_infotype( EXPORTING iv_pernr = iv_pernr
+                             iv_begda = iv_date
+                             iv_endda = iv_date
+                             iv_infty = iv_infty
+                             iv_tclas = iv_tclas
+                   CHANGING  ct_pnnnn   = <tab> ).
+
+    CLEAR <wa>.
+
+*   support
+    IF iv_subty IS INITIAL.
+      READ TABLE <tab>  INTO <wa> INDEX 1.
+    ELSE.
+      READ TABLE <tab>  INTO <wa>
+      WITH KEY ('SUBTY') = iv_subty.
+    ENDIF.
+
+    CHECK sy-subrc IS INITIAL.
+
+    ASSIGN COMPONENT iv_fieldname OF STRUCTURE <wa> TO <value>.
+
+    IF <value> IS ASSIGNED.
+*     Destinatário
+      MOVE: <value> TO ev_fieldvalue.
+    ENDIF.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->GET_MAIL
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PERNR                       TYPE        PERNR_D
+* | [--->] IV_SUBTY                       TYPE        SUBTY (default ='0010')
+* | [--->] IV_DATE                        TYPE        DATUM (default =SY-DATUM)
+* | [<-()] RV_EMAIL                       TYPE        COMM_ID_LONG
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_mail.
+
+    DATA tl_0105 TYPE TABLE OF p0105.
+
+    read_infotype(
+      EXPORTING
+        iv_pernr = iv_pernr
+        iv_begda = iv_date
+        iv_endda = iv_date
+        iv_infty = '0105'
+      CHANGING
+        ct_pnnnn = tl_0105
+           ).
+
+    TRY .
+        rv_email = tl_0105[ subty = iv_subty ]-usrid_long.
+
+      CATCH cx_sy_itab_line_not_found.
+
+    ENDTRY.
+
+
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->GET_PERNR_FROM_USERID
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_USERID                      TYPE        P0105-USRID
+* | [--->] IV_USRTY                       TYPE        P0105-USRTY (default ='001')
+* | [--->] IV_BEGDA                       TYPE        P0105-BEGDA (default =IF_HRBAS_CONSTANTS=>LOW_DATE)
+* | [--->] IV_ENDDA                       TYPE        P0105-ENDDA (default =IF_HRBAS_CONSTANTS=>HIGH_DATE)
+* | [<-()] RV_PERNR                       TYPE        P0105-PERNR
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_pernr_from_userid.
+
+
+    CALL FUNCTION 'RP_GET_PERNR_FROM_USERID'
+      EXPORTING
+        begda     = iv_begda
+        endda     = iv_endda
+        usrid     = iv_userid
+        usrty     = iv_usrty
+      IMPORTING
+        usr_pernr = rv_pernr
+      EXCEPTIONS
+        retcd     = 1.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->INFOTYPE_OPERATION
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_INFTY                       TYPE        INFTY
+* | [--->] IV_ACTIO                       TYPE        ACTIO
+* | [--->] IS_PNNNN                       TYPE        ANY
+* | [--->] IV_NOCOMMIT                    TYPE        BAPI_STAND-NO_COMMIT(optional)
+* | [--->] IS_PSKEY                       TYPE        PSKEY(optional)
+* | [--->] IS_SECONDARY                   TYPE        ANY(optional)
+* | [--->] IV_VIEKN                       TYPE        VIEKN(optional)
+* | [--->] IV_NO_BLOCK                    TYPE        CHAR1(optional)
+* | [--->] IV_TCLAS                       TYPE        PSPAR-TCLAS (default ='B')
+* | [--->] IV_DIALOG_MODE                 TYPE        C (default ='0')
+* | [--->] IS_PROP                        TYPE        PES_PPROP(optional)
+* | [<-->] ES_RETURN                      TYPE        BAPIRETURN1(optional)
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD infotype_operation.
+
+    DATA: ls_pskey TYPE pskey. "Dados de cabeçalho PNNNN
+    DATA: ls_pakey TYPE bapipakey.
+    DATA: vl_molga TYPE t500l-molga.
+
+    CALL FUNCTION 'RH_PM_GET_MOLGA_FROM_PERNR'
+      EXPORTING
+        pernr           = ls_pskey-pernr "iv_pskey-pernr
+      IMPORTING
+        molga           = vl_molga
+      EXCEPTIONS
+        nothing_found   = 1
+        no_active_plvar = 2
+        OTHERS          = 3.
+
+    IF NOT iv_viekn IS INITIAL.
+      vl_molga = iv_viekn.
+    ENDIF.
+
+    IF is_pskey IS INITIAL.
+      MOVE-CORRESPONDING is_pnnnn TO ls_pskey.
+    ELSE.
+      ls_pskey = is_pskey.
+    ENDIF.
+
+    CLEAR es_return.
+
+*    CALL FUNCTION 'HR_PSBUFFER_INITIALIZE'.
+
+    IF iv_no_block IS INITIAL AND NOT ls_pskey-pernr IS INITIAL.
+
+      IF iv_tclas = 'A'.
+*       Bloqueia funcionário
+        CALL FUNCTION 'BAPI_EMPLOYEET_ENQUEUE'
+          EXPORTING
+            number        = ls_pskey-pernr
+            validitybegin = sy-datum
+          IMPORTING
+            return        = es_return.
+      ELSE.
+*       Bloqueia Candidato
+        CALL FUNCTION 'BAPI_APPLICANT_ENQUEUE'
+          EXPORTING
+            applicantnumber = ls_pskey-pernr
+          IMPORTING
+            return          = es_return.
+      ENDIF.
+
+    ENDIF.
+
+*   Atualiza funcionário
+    IF es_return IS INITIAL.
+
+      SET UPDATE TASK LOCAL.
+
+      CLEAR es_return.
+
+      CALL FUNCTION 'HR_INFOTYPE_OPERATION'
+        EXPORTING
+          infty            = iv_infty
+          number           = ls_pskey-pernr
+          subtype          = ls_pskey-subty
+          objectid         = ls_pskey-objps
+          lockindicator    = ls_pskey-sprps
+          validityend      = ls_pskey-endda
+          validitybegin    = ls_pskey-begda
+          recordnumber     = ls_pskey-seqnr
+          record           = is_pnnnn
+          operation        = iv_actio
+          tclas            = iv_tclas
+          nocommit         = iv_nocommit
+          secondary_record = is_secondary
+          dialog_mode      = iv_dialog_mode
+          view_identifier  = vl_molga
+        IMPORTING
+          return           = es_return
+          key              = ls_pakey.
+
+
+      IF iv_no_block IS INITIAL.
+
+        IF iv_tclas = 'A'.
+*         Desbloqueia funcionário
+          CALL FUNCTION 'BAPI_EMPLOYEET_DEQUEUE'
+            EXPORTING
+              number        = ls_pskey-pernr
+              validitybegin = sy-datum.
+        ELSE.
+*         Desbloqueia Candidato
+          CALL FUNCTION 'BAPI_APPLICANT_DEQUEUE'
+            EXPORTING
+              applicantnumber = ls_pskey-pernr
+            IMPORTING
+              return          = es_return.
+        ENDIF.
+      ENDIF.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_UTIL_EMPLOYEES->READ_INFOTYPE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PERNR                       TYPE        ANY
+* | [--->] IV_BEGDA                       TYPE        ANY (default =IF_HRBAS_CONSTANTS=>LOW_DATE)
+* | [--->] IV_ENDDA                       TYPE        ANY (default =IF_HRBAS_CONSTANTS=>HIGH_DATE)
+* | [--->] IV_INFTY                       TYPE        PRELP-INFTY
+* | [--->] IV_TCLAS                       TYPE        PSPAR-TCLAS (default ='A')
+* | [<-->] CT_PNNNN                       TYPE        STANDARD TABLE
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD read_infotype.
+
+    DATA: vl_pernr TYPE prelp-pernr.
+    vl_pernr = iv_pernr.
+
+    REFRESH ct_pnnnn.
+
+    CALL FUNCTION 'HR_READ_INFOTYPE'
+      EXPORTING
+        tclas           = iv_tclas
+        pernr           = vl_pernr "iv_pernr
+        infty           = iv_infty
+        begda           = iv_begda
+        endda           = iv_endda
+        bypass_buffer   = abap_true
+      TABLES
+        infty_tab       = ct_pnnnn
+      EXCEPTIONS
+        infty_not_found = 1
+        OTHERS          = 2.
+
+    IF sy-subrc IS INITIAL.
+      SORT ct_pnnnn BY ('ENDDA') DESCENDING
+                       ('BEGDA') DESCENDING.
+    ENDIF.
+
+  ENDMETHOD.
+ENDCLASS.
