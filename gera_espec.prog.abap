@@ -66,7 +66,7 @@ DATA: BEGIN OF t_select OCCURS 0,                           "#EC NEEDED
         select(200) TYPE c,
       END OF t_select.
 
-*** Tabelas para a criaÁ„o da tabela de seleÁ„o
+*** Tabelas para a cria√ß√£o da tabela de sele√ß√£o
 DATA: BEGIN OF t_tabela OCCURS 0,
         tabela    TYPE string,
         descricao TYPE string,
@@ -114,7 +114,7 @@ TYPES: BEGIN OF ty_source,
 DATA: tl_selecao TYPE TABLE OF ty_source WITH HEADER LINE,
       t_source   TYPE TABLE OF ty_source WITH HEADER LINE.
 
-*** Tabela de seleÁ„o
+*** Tabela de sele√ß√£o
 DATA: BEGIN OF t_selecao OCCURS 0,
         tabela  LIKE TABLE OF t_tabela,
         tipo    TYPE string,
@@ -164,24 +164,24 @@ DATA: t_split TYPE TABLE OF type_split WITH HEADER LINE.
 
 DATA: BEGIN OF t_parameter OCCURS 0,
         nome    TYPE string,  "Nome do campo
-        tipo    TYPE string,  "Tipo do par‚metro
+        tipo    TYPE string,  "Tipo do par√¢metro
         texto   TYPE string,  "Texto da tela
-        campo   TYPE string,  "Tipo de campo/referÍncia
+        campo   TYPE string,  "Tipo de campo/refer√™ncia
         default TYPE string,  "Valor inicial
-        cons    TYPE string,  "ConsistÍncia/ObservaÁ„o
+        cons    TYPE string,  "Consist√™ncia/Observa√ß√£o
       END OF t_parameter.
 
 DATA: BEGIN OF t_select_opt OCCURS 0,
         nome    TYPE string,  "Nome do campo
-        tipo    TYPE string,  "Tipo do par‚metro
+        tipo    TYPE string,  "Tipo do par√¢metro
         texto   TYPE string,  "Texto da tela
-        campo   TYPE string,  "Tipo de campo/referÍncia
+        campo   TYPE string,  "Tipo de campo/refer√™ncia
         default TYPE string,  "Valor inicial
-        cons    TYPE string,  "ConsistÍncia/ObservaÁ„o
+        cons    TYPE string,  "Consist√™ncia/Observa√ß√£o
       END OF t_select_opt.
 
 DATA: BEGIN OF t_texto_tra OCCURS 0,
-        portug(255)   TYPE c, "Campo em PortuguÍs
+        portug(255)   TYPE c, "Campo em Portugu√™s
         ingles(255)   TYPE c, "Campo em Ingles
         outro_id(255) TYPE c, "Outro Idioma
       END OF t_texto_tra.
@@ -294,7 +294,7 @@ TYPES: BEGIN OF zerequest,
        END OF zevariant.
 
 
-** CriaÁ„o de Estrutura para os dados da Captura.
+** Cria√ß√£o de Estrutura para os dados da Captura.
 * Dados de Request.
 DATA t_request TYPE TABLE OF zerequest.
 DATA e_request TYPE zerequest.
@@ -306,7 +306,7 @@ DATA t_caract TYPE zecaract.
 DATA: t_textos TYPE TABLE OF zetext.
 DATA: e_textos TYPE zetext.
 
-**Dados das transaÁıes
+**Dados das transa√ß√µes
 DATA: t_transacao TYPE TABLE OF zetransaction.
 DATA: e_transacao TYPE zetransaction.
 
@@ -347,7 +347,7 @@ DATA: v_linha_form(72)       TYPE c,
       v_cond_join(100)       TYPE c,
       v_for_all(20)          TYPE c,
       v_cond_where(100)      TYPE c,
-**Variavel de quantidade de prametros de seleÁ„o.
+**Variavel de quantidade de prametros de sele√ß√£o.
       v_qtd_param(3)         TYPE c,
       v_qtd_selop(3)         TYPE c,
 
@@ -380,7 +380,7 @@ CONSTANTS:
   c_fimdarotina(13) TYPE  c               VALUE 'Fim da Rotina'. "#EC NOTEXT
 
 ***------------------------------------------------------------------***
-***  Parametros de SeleÁ„o                                           ***
+***  Parametros de Sele√ß√£o                                           ***
 ***------------------------------------------------------------------***
 
 SELECTION-SCREEN BEGIN OF BLOCK c1 WITH FRAME TITLE TEXT-c01.
@@ -421,11 +421,11 @@ START-OF-SELECTION.
 
   ELSE.
     MESSAGE i208(00) WITH TEXT-002.
-*   N„o existem dados para os par‚metros informados
+*   N√£o existem dados para os par√¢metros informados
     STOP.
   ENDIF.
 
-***Busca o cÛdigo fonte do programa indicado.
+***Busca o c√≥digo fonte do programa indicado.
   PERFORM scan_source_get_report TABLES t_prog USING programa.
   PERFORM progresso USING TEXT-003. "'Procurando as tabela utilizadas'.
   PERFORM busca_tabelas.
@@ -433,15 +433,15 @@ START-OF-SELECTION.
   PERFORM progresso USING TEXT-004. "'Procurando as contantes utilizadas'.
   PERFORM busca_constantes.
 
-  PERFORM progresso USING TEXT-005. "'Procurando as tabelas internas e vari·veis utilizadas'.
+  PERFORM progresso USING TEXT-005. "'Procurando as tabelas internas e vari√°veis utilizadas'.
   PERFORM busca_variaveis_tab_int.
 
-***   Captura as informaÁıes de Request, Textos e Caracteriscas da
+***   Captura as informa√ß√µes de Request, Textos e Caracteriscas da
 ***   classe global ZCL_SCAN_SOURCE_ATRIBUTES da programa selecionado.
-  PERFORM progresso USING TEXT-007. "'Procurando as caracterÌsticas dos campos utilizados no programa'.
+  PERFORM progresso USING TEXT-007. "'Procurando as caracter√≠sticas dos campos utilizados no programa'.
   PERFORM busca_caract.
 
-  PERFORM progresso USING TEXT-008. "'Procurando os par‚metros'.
+  PERFORM progresso USING TEXT-008. "'Procurando os par√¢metros'.
   PERFORM busca_parametros.
 
   PERFORM progresso USING TEXT-009. "'Procurando os SELECT-OPTIONS'.
@@ -451,13 +451,13 @@ START-OF-SELECTION.
   PERFORM busca_rotinas.
   PERFORM busca_forms.
 
-  PERFORM progresso USING TEXT-011. "'Procurando as funÁıes utilizadas no programa'.
+  PERFORM progresso USING TEXT-011. "'Procurando as fun√ß√µes utilizadas no programa'.
   PERFORM busca_funcoes.
 
   PERFORM progresso USING TEXT-012. "'Procurando as includes utilizadas no programa'.
   PERFORM busca_includes.
 
-  PERFORM progresso USING TEXT-013. "'Procurando as seleÁıes do programa'.
+  PERFORM progresso USING TEXT-013. "'Procurando as sele√ß√µes do programa'.
   PERFORM busca_select.
 
   PERFORM progresso USING TEXT-014. "'Procurando os eventos do programa'.
@@ -477,9 +477,9 @@ START-OF-SELECTION.
 
   PERFORM z_info_geral USING t_caract-titulo_prog  "Titulo
                              t_caract-programa     "Codigo do Programa
-                             e_transacao-transacao   "TransaÁ„o
+                             e_transacao-transacao   "Transa√ß√£o
                              ''                      "Modulo
-                             t_caract-data_criacao   "Data CriaÁ„o
+                             t_caract-data_criacao   "Data Cria√ß√£o
                              ''                      "Cliente
                              ''                      "Responsavel Proc
                              ''                      "Responsavel Func
@@ -495,7 +495,7 @@ START-OF-SELECTION.
 
   LOOP AT t_request INTO e_request.
     PERFORM z_hist_mod_items USING  e_request-data       "Data
-                                    e_request-descricao  "DescriÁ„o
+                                    e_request-descricao  "Descri√ß√£o
                                     e_request-autor      "Solicitado
                                     e_request-num_ordem  "Change
                                     v_qtd_request."Qtdade de Request
@@ -534,8 +534,8 @@ START-OF-SELECTION.
   DESCRIBE TABLE t_desc_tab LINES v_qtd_tabela.
   LOOP AT t_desc_tab.
     PERFORM z_tab_transp_items  USING  t_desc_tab-tabname "Tabela
-                                       t_desc_tab-ddtext  "DescriÁ„o
-                                     ''                 "EspecificaÁ„o
+                                       t_desc_tab-ddtext  "Descri√ß√£o
+                                     ''                 "Especifica√ß√£o
                                      v_qtd_tabela.  "Qtdade de tabelas
 
     CLEAR t_desc_tab.
@@ -559,23 +559,23 @@ START-OF-SELECTION.
                                     'N/A' "Elem.
                                     'N/A' "Tipo
                                     'N/A' "Tam
-                                    'N/A' "DescriÁ„o
-                                    'N/A' "ObservaÁ„o
+                                    'N/A' "Descri√ß√£o
+                                    'N/A' "Observa√ß√£o
                          '1'. "Qtdade de campos da tabela a ser criada
 
   PERFORM z_new_line.
   PERFORM z_trans_header.
-  PERFORM z_trans_items USING  'N/A'  "TransaÁ„o
-                               'N/A'  "DescriÁ„o
-                               '1'.         "Qtd de transaÁıes
+  PERFORM z_trans_items USING  'N/A'  "Transa√ß√£o
+                               'N/A'  "Descri√ß√£o
+                               '1'.         "Qtd de transa√ß√µes
 
   PERFORM z_new_line.
   PERFORM z_arq_header.
   PERFORM z_arq_items USING   'N/A' "Nome Arq
                               'N/A' "Nome Campo
-                              'N/A' "PosiÁ„o
+                              'N/A' "Posi√ß√£o
                               'N/A' "Tamanho
-                              'N/A' "DescriÁ„o
+                              'N/A' "Descri√ß√£o
                               '1'.         "Qtd de Arquivos
 
   PERFORM z_new_line.
@@ -583,14 +583,14 @@ START-OF-SELECTION.
   PERFORM z_param_imp_func_header.
   PERFORM z_param_imp_func_items USING  'N/A' "Campo
                                         'N/A' "Formato
-                                        'N/A' "ObservaÁ„o
+                                        'N/A' "Observa√ß√£o
                                         '1'.
 
   PERFORM z_new_line.
   PERFORM z_param_exp_func_header.
   PERFORM z_param_exp_func_items USING  'N/A' "Campo
                                         'N/A' "Formato
-                                        'N/A' "ObservaÁ„o
+                                        'N/A' "Observa√ß√£o
                                          '1'.
 
   PERFORM z_new_line.
@@ -598,7 +598,7 @@ START-OF-SELECTION.
   PERFORM z_param_tab_func_items USING  'N/A' "Tabela
                                         'N/A' "Estrutura
                                         'N/A' "Tipo de refer
-                                        'N/A' "ObservaÁ„o
+                                        'N/A' "Observa√ß√£o
                                         '1'.
 
   PERFORM z_new_line.
@@ -615,11 +615,11 @@ START-OF-SELECTION.
   IF t_parameter[] IS INITIAL AND t_select_opt[] IS INITIAL.
     PERFORM z_param_selec_header.
     PERFORM z_param_selec_items USING 'N/A' "Nome
-                                      'N/A' "Tipo de Par‚metro
+                                      'N/A' "Tipo de Par√¢metro
                                       'N/A' "Texto da Tela
                                       'N/A' "Tipo de Referencia
                                       'N/A' "Valor Inicial
-                                      'N/A' "ObservaÁ„o
+                                      'N/A' "Observa√ß√£o
                                       '1'.
     PERFORM z_new_line.
   ELSEIF NOT t_parameter[] IS INITIAL AND t_select_opt[] IS INITIAL.
@@ -643,11 +643,11 @@ START-OF-SELECTION.
 
       PERFORM z_param_selec_items USING
                                v_par_nome      "Nome
-                               v_par_tipo      "Tipo de Par‚metro
+                               v_par_tipo      "Tipo de Par√¢metro
                                v_par_texto     "Texto da Tela
                                v_par_campo     "Tipo de Referencia
                                v_par_default   "Valor Inicial
-                               v_par_cons      "ObservaÁ„o
+                               v_par_cons      "Observa√ß√£o
                                v_qtd_param.
       CLEAR t_parameter.
     ENDLOOP.
@@ -673,11 +673,11 @@ START-OF-SELECTION.
 
       PERFORM z_param_selec_items USING
                                   v_selop_nome     "Nome
-                                  v_selop_tipo     "Tipo de Par‚metro
+                                  v_selop_tipo     "Tipo de Par√¢metro
                                   v_selop_texto    "Texto da Tela
                                   v_selop_campo    "Tipo de Referencia
                                   v_selop_default  "Valor Inicial
-                                  v_selop_cons     "ObservaÁ„o
+                                  v_selop_cons     "Observa√ß√£o
                                   v_qtd_selop.
       CLEAR t_select_opt.
     ENDLOOP.
@@ -717,11 +717,11 @@ START-OF-SELECTION.
 
       PERFORM z_param_selec_items USING
                                v_par_nome      "Nome
-                               v_par_tipo      "Tipo de Par‚metro
+                               v_par_tipo      "Tipo de Par√¢metro
                                v_par_texto     "Texto da Tela
                                v_par_campo     "Tipo de Referencia
                                v_par_default   "Valor Inicial
-                               v_par_cons      "ObservaÁ„o
+                               v_par_cons      "Observa√ß√£o
                                v_qtd_param.
       CLEAR t_parameter.
     ENDLOOP.
@@ -732,25 +732,25 @@ START-OF-SELECTION.
 
   PERFORM z_dados_proj_header.
   PERFORM z_dados_proj_items USING   'N/A' "Projeto
-                                     'N/A' "AmpliaÁ„o
+                                     'N/A' "Amplia√ß√£o
                                      'N/A' "Componentes
                                      '1'.
 
   PERFORM z_new_line.
   PERFORM z_prog_form USING     'N/A' "Programa Standard
-                                'N/A' "Formul·rio Standard
-                                'N/A' "TransaÁ„o Form
-                                'N/A'. "TransaÁ„o
+                                'N/A' "Formul√°rio Standard
+                                'N/A' "Transa√ß√£o Form
+                                'N/A'. "Transa√ß√£o
 
   PERFORM z_new_line.
   PERFORM z_campos_tela_header.
-  PERFORM z_campos_tela_items USING   'N/A' "TransaÁ„o SAP
+  PERFORM z_campos_tela_items USING   'N/A' "Transa√ß√£o SAP
                                       'N/A' "Programa
                                       'N/A' "Nr.Tela
                                       'N/A' "Nome campo na tela
                                       'N/A' "Nome do Data Element
                                       'N/A' "Id Parameter
-                                      'N/A' "ObservaÁıes
+                                      'N/A' "Observa√ß√µes
                                       '1'.
 
   PERFORM z_new_line.
@@ -759,7 +759,7 @@ START-OF-SELECTION.
                                'N/A' "Nome do Data Element
                                'N/A' "Get Parameter
                                'N/A' "Set Parameter
-                               'N/A' "FunÁ„o
+                               'N/A' "Fun√ß√£o
                                '1'.
 
   PERFORM z_new_line.
@@ -768,10 +768,10 @@ START-OF-SELECTION.
                                       '  ' "Form
                                       '  ' "Tam.
                                       '  ' "Trunc.
-                                      '  ' "DescriÁ„o Campo
+                                      '  ' "Descri√ß√£o Campo
                                       '  ' "Tabela
                                       '  ' "Campo
-                                      '  ' "ObservaÁıes
+                                      '  ' "Observa√ß√µes
                                       '1'.
 
   PERFORM z_new_line.
@@ -779,8 +779,8 @@ START-OF-SELECTION.
 
   DESCRIBE TABLE t_texto_tra LINES v_qtd_textos.
   LOOP AT t_texto_tra.
-    PERFORM z_textos_items USING  t_texto_tra-portug      "Campo PortuguÍs
-                                  t_texto_tra-ingles      "'Campo InglÍs'
+    PERFORM z_textos_items USING  t_texto_tra-portug      "Campo Portugu√™s
+                                  t_texto_tra-ingles      "'Campo Ingl√™s'
                                   '  '                    "'Outro Idioma'
                                       v_qtd_textos.
   ENDLOOP.
@@ -788,9 +788,9 @@ START-OF-SELECTION.
   PERFORM z_new_line.
   PERFORM z_msgs_header.
   PERFORM z_msgs_items USING          '  ' "Classe
-                                      '  ' "N∫
-                                      '  ' "PortuguÍs
-                                      '  ' "InglÍs
+                                      '  ' "N¬∫
+                                      '  ' "Portugu√™s
+                                      '  ' "Ingl√™s
                                       '  ' "Outro Idioma
                                       '1'.
 
@@ -802,13 +802,13 @@ START-OF-SELECTION.
 
   PERFORM z_new_line.
   PERFORM z_botoes_header.
-  PERFORM z_botoes_items USING        'N/A' "CÛdigo Func„o
-                                      'N/A' "Categoria de FunÁ„o
-                                      'N/A' "Texto da FunÁ„o
+  PERFORM z_botoes_items USING        'N/A' "C√≥digo Func√£o
+                                      'N/A' "Categoria de Fun√ß√£o
+                                      'N/A' "Texto da Fun√ß√£o
                                       'N/A' "Nome do Icone
                                       'N/A' "Texto de Icones
                                       'N/A' "Texto Informativo
-                                      'N/A' "Selec„o Direta
+                                      'N/A' "Selec√£o Direta
                                       '1'.
 
   PERFORM z_pag_logic_proc."Logica de Processamento
@@ -820,8 +820,8 @@ START-OF-SELECTION.
                                 '0'                "Underline
                                 wdcolorautomatic   "Font Color
                                 wdcolorautomatic   "BGColor
-                                ''                 "Õndice
-                                TEXT-016.          "Texto  -  LÛgica principal
+                                ''                 "√çndice
+                                TEXT-016.          "Texto  -  L√≥gica principal
 
   LOOP AT t_eventos.
     PERFORM z_escreve_texto USING 'Arial'            "Font
@@ -831,7 +831,7 @@ START-OF-SELECTION.
                                   '0'                "Underline
                                   wdcolorautomatic   "Font Color
                                   wdcolorautomatic   "BGColor
-                                  ''                 "Õndice
+                                  ''                 "√çndice
                                   t_eventos-eventos. "Texto
     CLEAR t_eventos.
   ENDLOOP. "t_eventos
@@ -843,8 +843,8 @@ START-OF-SELECTION.
                                 '0'                "Underline
                                 wdcolorautomatic   "Font Color
                                 wdcolorautomatic   "BGColor
-                                ''                 "Õndice
-                                TEXT-017.          "Texto  - LÛgica de processamento
+                                ''                 "√çndice
+                                TEXT-017.          "Texto  - L√≥gica de processamento
 
 
   LOOP AT t_forms.
@@ -856,7 +856,7 @@ START-OF-SELECTION.
                                     '0'                "Underline
                                     wdcolorautomatic   "Font Color
                                     wdcolorautomatic   "BGColor
-                                    ''                 "Õndice
+                                    ''                 "√çndice
                                     t_forms-form.      "Texto
     ELSEIF t_forms-e_endform EQ 'X'.
       PERFORM z_escreve_texto USING 'Arial'            "Font
@@ -866,7 +866,7 @@ START-OF-SELECTION.
                                     '0'                "Underline
                                      wdcolorautomatic  "Font Color
                                      wdcolorautomatic  "BGColor
-                                     ''                "Õndice
+                                     ''                "√çndice
                                      t_forms-form.     "Texto
 
       PERFORM z_new_line.
@@ -879,7 +879,7 @@ START-OF-SELECTION.
                                     '0'                "Underline
                                     wdcolorautomatic   "Font Color
                                     wdcolorautomatic   "BGColor
-                                    ''                 "Õndice
+                                    ''                 "√çndice
                                     t_forms-form.    "Texto
     ENDIF.
 
@@ -915,7 +915,7 @@ START-OF-SELECTION.
                                   '0'                "Underline
                                   wdcolorautomatic   "Font Color
                                   wdcolorautomatic   "BGColor
-                                  ''                 "Õndice
+                                  ''                 "√çndice
                                   v_tab_e_desc.
       ENDLOOP. "t_selecao-tabela into e_tabela.
     ELSE.
@@ -932,7 +932,7 @@ START-OF-SELECTION.
                                   '0'                "Underline
                                   wdcolorautomatic   "Font Color
                                   wdcolorautomatic   "BGColor
-                                  ''                 "Õndice
+                                  ''                 "√çndice
                                   v_tab_e_desc.
 
       ENDIF.
@@ -960,7 +960,7 @@ START-OF-SELECTION.
                                   '0'                "Underline
                                   wdcolorautomatic   "Font Color
                                   wdcolorautomatic   "BGColor
-                                  ''                 "Õndice
+                                  ''                 "√çndice
                                   e_campos-campo.
 
       ENDLOOP.
@@ -974,7 +974,7 @@ START-OF-SELECTION.
                                   '0'                "Underline
                                   wdcolorautomatic   "Font Color
                                   wdcolorautomatic   "BGColor
-                                  ''                 "Õndice
+                                  ''                 "√çndice
                                   e_campos-campo.
 
       ENDIF.
@@ -1032,7 +1032,7 @@ START-OF-SELECTION.
                                     '0'                "Underline
                                     wdcolorautomatic   "Font Color
                                     wdcolorautomatic   "BGColor
-                                    ''                 "Õndice
+                                    ''                 "√çndice
                                     v_cond_join.
 
 
@@ -1067,7 +1067,7 @@ START-OF-SELECTION.
                                     '0'                "Underline
                                     wdcolorautomatic   "Font Color
                                     wdcolorautomatic   "BGColor
-                                    ''                 "Õndice
+                                    ''                 "√çndice
                                     v_cond_join.
 
 
@@ -1107,7 +1107,7 @@ START-OF-SELECTION.
                                   '0'                "Underline
                                   wdcolorautomatic   "Font Color
                                   wdcolorautomatic   "BGColor
-                                  ''                 "Õndice
+                                  ''                 "√çndice
                                   v_cond_where.
 
 
@@ -1129,7 +1129,7 @@ START-OF-SELECTION.
                                 '0'                "Underline
                                 wdcolorautomatic   "Font Color
                                 wdcolorautomatic   "BGColor
-                                ''                 "Õndice
+                                ''                 "√çndice
                                 v_cond_where.
     ENDIF.
 
@@ -1223,7 +1223,7 @@ FORM busca_tabelas.
 
     SELECT tabname     "tabela
            ddlanguage  "idioma
-           ddtext      "DescriÁ„o
+           ddtext      "Descri√ß√£o
     FROM dd02t
     INTO TABLE t_desc_tab
     FOR ALL ENTRIES IN t_tab
@@ -1262,7 +1262,7 @@ FORM busca_constantes.
 
   IF NOT t_const[] IS INITIAL.
 ***-----------------------------------------------------------------***
-***FunÁ„o para traduzir o cÛdigo em PortuguÍs estruturado           ***
+***Fun√ß√£o para traduzir o c√≥digo em Portugu√™s estruturado           ***
 ***-----------------------------------------------------------------***
 
     PERFORM funcao_espec_tec TABLES t_const USING 'X' space space.
@@ -1343,12 +1343,12 @@ FORM busca_variaveis_tab_int.
   CLEAR: t_var, t_tab_int.
 
 ***-----------------------------------------------------------------***
-***FunÁ„o para traduzir o cÛdigo em PortuguÍs estruturado           ***
+***Fun√ß√£o para traduzir o c√≥digo em Portugu√™s estruturado           ***
 ***-----------------------------------------------------------------***
   PERFORM funcao_espec_tec TABLES t_tab_int USING 'X' space space.
 
 ***-----------------------------------------------------------------***
-***FunÁ„o para traduzir o cÛdigo em PortuguÍs estruturado           ***
+***Fun√ß√£o para traduzir o c√≥digo em Portugu√™s estruturado           ***
 ***-----------------------------------------------------------------***
   PERFORM funcao_espec_tec TABLES t_var USING 'X' space space.
 
@@ -1415,10 +1415,10 @@ FORM busca_parametros.
     SPLIT t_par-par AT '#' INTO TABLE t_split.
     CLEAR t_split.
     t_aux[] = t_split[].
-*** Pego o par‚metro de selecao.
+*** Pego o par√¢metro de selecao.
     READ TABLE t_split INDEX 1.
     MOVE t_split-campo TO t_parameter-nome.
-*** Pego tudo que È like ou type
+*** Pego tudo que √© like ou type
     READ TABLE t_split WITH KEY campo = 'LIKE'.
     IF sy-subrc IS INITIAL.
       MOVE t_split-campo TO t_parameter-campo.
@@ -1439,14 +1439,14 @@ FORM busca_parametros.
       ENDIF.
     ENDIF.
 
-*** Procuro o texto da tela se aplic·vel.
+*** Procuro o texto da tela se aplic√°vel.
 *    READ TABLE t_textos INTO e_textos WITH KEY chave = t_aux-campo.
     IF sy-subrc IS INITIAL.
 *      t_parameter-campo = e_textos-texto.
     ENDIF.
 
 
-*** Verifico se o par‚metro tem valor default.
+*** Verifico se o par√¢metro tem valor default.
     READ TABLE t_split WITH KEY campo = 'DEFAULT'.
     IF sy-subrc IS INITIAL.
       i_linha = sy-tabix + 1.
@@ -1455,7 +1455,7 @@ FORM busca_parametros.
       CLEAR i_linha.
     ENDIF.
 
-*** Verifico o tipo de par‚metro.
+*** Verifico o tipo de par√¢metro.
     LOOP AT t_split.
       CASE t_split-campo.
         WHEN 'RADIOBUTTON'.
@@ -1483,7 +1483,7 @@ FORM busca_parametros.
             CONTINUE.
           ENDIF.
       ENDCASE.
-*** Pego as opÁıes complementares se houver.
+*** Pego as op√ß√µes complementares se houver.
       CASE t_split-campo.
         WHEN 'DECIMALS'.
           i_linha = sy-tabix + 1.
@@ -1523,7 +1523,7 @@ FORM busca_parametros.
     REFRESH: t_split, t_aux.
   ENDLOOP.
 *****************
-*** Procuro o texto da tela se aplic·vel.
+*** Procuro o texto da tela se aplic√°vel.
 
   LOOP AT t_parameter.
 
@@ -1595,7 +1595,7 @@ FORM busca_rotinas.
   ENDIF.
 
 ***-----------------------------------------------------------------***
-***FunÁ„o para traduzir o cÛdigo em PortuguÍs estruturado           ***
+***Fun√ß√£o para traduzir o c√≥digo em Portugu√™s estruturado           ***
 ***-----------------------------------------------------------------***
   PERFORM funcao_espec_tec TABLES t_rotinas USING space 'X' space.
 
@@ -1640,7 +1640,7 @@ FORM busca_funcoes.
   ENDIF.
   FREE:  t_busca, tk, stm.
   CLEAR: t_busca, tk, stm, t_funcoes.
-ENDFORM. " busca_funÁoes
+ENDFORM. " busca_fun√ßoes
 
 *---------------------------------------------------------------------*
 *       FORM busca_includes                                           *
@@ -1734,7 +1734,7 @@ FORM busca_select.
     PERFORM busca_final TABLES   tk_aux
                         USING    i_c
                         CHANGING i_f.
-*** Busca o tipo de select se aplic·vel
+*** Busca o tipo de select se aplic√°vel
     PERFORM busca_tipo TABLES tk_aux
                         USING i_c
                               i_f.
@@ -1746,27 +1746,27 @@ FORM busca_select.
     PERFORM busca_from TABLES tk_aux
                         USING i_c
                               i_f.
-*** Busca a condiÁ„o geral do select
+*** Busca a condi√ß√£o geral do select
     PERFORM busca_where TABLES tk_aux
                          USING i_c
                                i_f.
-*** Busca o tipo de join e sua condiÁ„o se aplic·vel
+*** Busca o tipo de join e sua condi√ß√£o se aplic√°vel
     PERFORM busca_join TABLES tk_aux
                           USING i_c
                                 i_f.
-*** Busca a tabela de destino se aplic·vel
+*** Busca a tabela de destino se aplic√°vel
     PERFORM busca_into TABLES tk_aux
                         USING i_c
                               i_f.
-*** Busca o for all entries se aplic·vel
+*** Busca o for all entries se aplic√°vel
     PERFORM busca_for TABLES tk_aux
                        USING i_c
                              i_f.
-*** Busca a classificaÁ„o se aplic·vel
+*** Busca a classifica√ß√£o se aplic√°vel
     PERFORM busca_classificacao TABLES tk_aux
                                  USING i_c
                                        i_f.
-*** Busca o agrupento se aplic·vel
+*** Busca o agrupento se aplic√°vel
     PERFORM busca_agrupamento TABLES tk_aux
                                USING i_c
                                      i_f.
@@ -1849,7 +1849,7 @@ FORM busca_forms.
   CLEAR: t_busca, tk, stm, t_rotinas, t_forms.
 
 ***-----------------------------------------------------------------***
-***FunÁ„o para traduzir o cÛdigo em PortuguÍs estruturado           ***
+***Fun√ß√£o para traduzir o c√≥digo em Portugu√™s estruturado           ***
 ***-----------------------------------------------------------------***
   PERFORM funcao_espec_tec TABLES t_forms USING space 'X' 'X'.
 
@@ -1881,7 +1881,7 @@ ENDFORM. " busca_forms
 *&---------------------------------------------------------------------*
 *&      Form  busca_eventos
 *&---------------------------------------------------------------------*
-*  Buscar lÛgica principal, conteudo dos eventos.
+*  Buscar l√≥gica principal, conteudo dos eventos.
 *----------------------------------------------------------------------*
 FORM busca_eventos.
 
@@ -2001,7 +2001,7 @@ FORM busca_eventos.
 
 
 ***-----------------------------------------------------------------***
-***FunÁ„o para traduzir o cÛdigo em PortuguÍs estruturado           ***
+***Fun√ß√£o para traduzir o c√≥digo em Portugu√™s estruturado           ***
 ***-----------------------------------------------------------------***
   PERFORM funcao_espec_tec TABLES t_eventos USING space 'X' 'X'.
 
@@ -2009,17 +2009,17 @@ ENDFORM. " busca_eventos
 *&---------------------------------------------------------------------*
 *&      Form  busca_caract
 *&---------------------------------------------------------------------*
-*    Captura as informaÁıes de Request, Textos e Caracteriscas do
+*    Captura as informa√ß√µes de Request, Textos e Caracteriscas do
 *    Programa
 *----------------------------------------------------------------------*
 FORM busca_caract.
 
-**** CriaÁ„o de Variaveis de tipos compativeis para Classe.
+**** Cria√ß√£o de Variaveis de tipos compativeis para Classe.
   DATA : l_prog     TYPE programm,      " Nome do Programa
          l_var(200) TYPE c,
          l_job(200) TYPE c.
 
-*** Objetos para captura das InformaÁıes.
+*** Objetos para captura das Informa√ß√µes.
   SELECT SINGLE tcode  FROM tstc
                      INTO (e_transacao-transacao)
                      WHERE pgmna EQ p_prog.
@@ -2069,7 +2069,7 @@ FORM busca_caract.
 
 ENDFORM. " busca_caract
 
-*** ==> InÌcio AB - 26/04/2006
+*** ==> In√≠cio AB - 26/04/2006
 *&---------------------------------------------------------------------*
 *&      Form  busca_final
 *&---------------------------------------------------------------------*
@@ -2334,14 +2334,14 @@ FORM busca_join TABLES p_tk_aux STRUCTURE tk
     ENDIF.
   ENDLOOP.
 
-*** LÛgica para identificar o tipo, a tabela, e as condiÁıes do join
+*** L√≥gica para identificar o tipo, a tabela, e as condi√ß√µes do join
   LOOP AT p_tk_aux FROM linha_i TO linha_f.
     IF linha_i IS INITIAL.
       EXIT.
     ENDIF.
     linha = sy-tabix.
     CASE p_tk_aux-str.
-      WHEN 'LEFT'.  " o join È do tipo left outer
+      WHEN 'LEFT'.  " o join √© do tipo left outer
         DO 4 TIMES.
           IF vezes EQ 3.
             READ TABLE t_aux INDEX linha.
@@ -2360,7 +2360,7 @@ FORM busca_join TABLES p_tk_aux STRUCTURE tk
         ENDDO.
         APPEND t_join.
         CLEAR: vezes, t_join.
-      WHEN 'INNER'.  " o join È do tipo inner
+      WHEN 'INNER'.  " o join √© do tipo inner
         DO 3 TIMES.
           IF vezes EQ 2.
             READ TABLE t_aux INDEX linha.
@@ -2379,7 +2379,7 @@ FORM busca_join TABLES p_tk_aux STRUCTURE tk
         ENDDO.
         APPEND t_join.
         CLEAR: vezes, t_join.
-      WHEN 'ON'.  "estou lendo a condiÁ„o do join
+      WHEN 'ON'.  "estou lendo a condi√ß√£o do join
         WHILE linha > linha_i AND linha < linha_f.
           IF vezes NE 3.
             ADD 1 TO linha.
@@ -2711,10 +2711,10 @@ FORM busca_select_options.
     SPLIT t_sel_opt-par AT '#' INTO TABLE t_split.
     CLEAR t_split.
     t_aux[] = t_split[].
-*** Pego o par‚metro de selecao.
+*** Pego o par√¢metro de selecao.
     READ TABLE t_split INDEX 1.
     MOVE t_split-campo TO t_select_opt-nome.
-*** Pego tudo que È like ou type
+*** Pego tudo que √© like ou type
     READ TABLE t_split WITH KEY campo = 'FOR'.
     IF sy-subrc IS INITIAL.
       MOVE t_split-campo TO t_select_opt-campo.
@@ -2735,7 +2735,7 @@ FORM busca_select_options.
       ENDIF.
     ENDIF.
 
-*** Verifico se o par‚metro tem valor default.
+*** Verifico se o par√¢metro tem valor default.
     READ TABLE t_split WITH KEY campo = 'DEFAULT'.
     IF sy-subrc IS INITIAL.
       i_linha = sy-tabix + 1.
@@ -2744,7 +2744,7 @@ FORM busca_select_options.
       CLEAR i_linha.
     ENDIF.
 
-*** Verifico o tipo de par‚metro.
+*** Verifico o tipo de par√¢metro.
     LOOP AT t_split.
       CASE t_split-campo.
         WHEN 'RADIOBUTTON'.
@@ -2772,7 +2772,7 @@ FORM busca_select_options.
             CONTINUE.
           ENDIF.
       ENDCASE.
-*** Pego as opÁıes complementares se houver.
+*** Pego as op√ß√µes complementares se houver.
       CASE t_split-campo.
         WHEN 'DECIMALS'.
           i_linha = sy-tabix + 1.
@@ -2814,7 +2814,7 @@ FORM busca_select_options.
   ENDLOOP.
 *****************
 *****************
-*** Procuro o texto da tela se aplic·vel.
+*** Procuro o texto da tela se aplic√°vel.
 
   LOOP AT t_select_opt.
 
@@ -2916,12 +2916,12 @@ FORM funcao_espec_tec TABLES t_entrada USING declaracao evento rotina.
                                     evento
                                     rotina.
 *  ELSE.
-*    MESSAGE i208(00) WITH 'Entrada est· vazia'.
+*    MESSAGE i208(00) WITH 'Entrada est√° vazia'.
 *    raise tabela_inicial.
   ENDIF.
 
 
-* Traduz os cÛdigos de Linguagem ABAP para PortuguÍs Estruturado.
+* Traduz os c√≥digos de Linguagem ABAP para Portugu√™s Estruturado.
   PERFORM z_traduz_codigos TABLES t_entrada
                                   t_entrada.
 
@@ -2969,9 +2969,9 @@ ENDFORM. " SCAN_SOURCE_GET_REPORT
 *&---------------------------------------------------------------------*
 *&      Form  z_seleciona_dados
 *&---------------------------------------------------------------------*
-* Essas validaÁıes s„o feitas para que quando for traduzido um tipo de
-* cÛdigo especifico n„o precise verificar com cÛdigos que n„o v„o
-* existir nesse bloco de cÛdigos.
+* Essas valida√ß√µes s√£o feitas para que quando for traduzido um tipo de
+* c√≥digo especifico n√£o precise verificar com c√≥digos que n√£o v√£o
+* existir nesse bloco de c√≥digos.
 *----------------------------------------------------------------------*
 *      -->P_DECLARACAO  text
 *      -->P_EVENTO  text
@@ -2981,38 +2981,38 @@ FORM z_seleciona_dados USING p_declaracao
                                  p_evento
                                  p_rotina.
 
-* Quando for flegado somente declaraÁ„o fara a seleÁ„o somente dos
-* cÛdigos referentes a DeclaraÁıes
+* Quando for flegado somente declara√ß√£o fara a sele√ß√£o somente dos
+* c√≥digos referentes a Declara√ß√µes
   IF  NOT p_declaracao IS INITIAL AND p_evento IS INITIAL
       AND p_rotina     IS INITIAL.
 
     PERFORM z_seleciona_declaracao..
 
-* Quando for flegado somente evento fara a seleÁ„o somente dos
-* cÛdigos referentes aos eventos que existem no cÛdigo.
+* Quando for flegado somente evento fara a sele√ß√£o somente dos
+* c√≥digos referentes aos eventos que existem no c√≥digo.
   ELSEIF p_declaracao IS INITIAL AND NOT p_evento IS INITIAL
          AND p_rotina IS INITIAL.
 
 
     PERFORM z_seleciona_evento.
 
-* Quando for flegado somente rotinas fara a seleÁ„o somente dos
-* cÛdigos referentes a todas as rotinas do programa.
+* Quando for flegado somente rotinas fara a sele√ß√£o somente dos
+* c√≥digos referentes a todas as rotinas do programa.
   ELSEIF p_declaracao IS INITIAL AND p_evento IS INITIAL
      AND NOT p_rotina IS INITIAL.
 
     PERFORM z_seleciona_rotina.
 
-* Quando n„o for flegado nada.
+* Quando n√£o for flegado nada.
   ELSEIF p_declaracao IS INITIAL AND p_evento IS INITIAL
      AND p_rotina     IS INITIAL.
 
-*    RAISE tipo_de_codigo_vazio. "preencher pelo menos um tipo de cÛdigo.
+*    RAISE tipo_de_codigo_vazio. "preencher pelo menos um tipo de c√≥digo.
 
 * Quando for flegado mais de um tipo.
   ELSE.
 *    RAISE tipo_de_codigo_mais_de_um.
-    "Preencher somente um tipo de cÛdigo.
+    "Preencher somente um tipo de c√≥digo.
   ENDIF.
 
 
@@ -3020,7 +3020,7 @@ ENDFORM. " z_seleciona_dados
 *&---------------------------------------------------------------------*
 *&      Form  z_seleciona_declaracao
 *&---------------------------------------------------------------------*
-* Seleciona sÛ os comados do tipo D 'DeclaraÁ„o'
+* Seleciona s√≥ os comados do tipo D 'Declara√ß√£o'
 *----------------------------------------------------------------------*
 FORM z_seleciona_declaracao.
   TYPES: BEGIN OF ty_source,
@@ -3029,8 +3029,8 @@ FORM z_seleciona_declaracao.
            sentenca TYPE as4text,
          END OF ty_source.
 *Tabela local para selecionar os tipos de comandos.
-*N„o foi possivel selecionar direto na t_source porque a t_source tem
-*que ser do tipo string È assim n„o podemos fazer uma seleÁ„o de campos
+*N√£o foi possivel selecionar direto na t_source porque a t_source tem
+*que ser do tipo string √© assim n√£o podemos fazer uma sele√ß√£o de campos
 *diferentes.
 *  DATA: BEGIN OF tl_selecao OCCURS 0,
 *          tipo     LIKE zege_source-linha,
@@ -3066,13 +3066,13 @@ ENDFORM. " z_seleciona_declaracao
 *&---------------------------------------------------------------------*
 *&      Form  z_seleciona_evento
 *&---------------------------------------------------------------------*
-*  Para os eventos cabem todos os tipos de cÛdigos
+*  Para os eventos cabem todos os tipos de c√≥digos
 *----------------------------------------------------------------------*
 FORM z_seleciona_evento.
 
 *Tabela local para selecionar os tipos de comandos.
-*N„o foi possivel selecionar direto na t_source porque a t_source tem
-*que ser do tipo string È assim n„o podemos fazer uma seleÁ„o de campos
+*N√£o foi possivel selecionar direto na t_source porque a t_source tem
+*que ser do tipo string √© assim n√£o podemos fazer uma sele√ß√£o de campos
 *diferentes.
 *  DATA: BEGIN OF tl_selecao OCCURS 0,
 *          tipo     TYPE CHAR1,
@@ -3124,22 +3124,22 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .APPEND.  ; .Adicionar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .APPENDING. ; .adicionando.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ARCHIVE.MODE.  ; .com modo de arquivamento.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ARCHIVE.PARAMETERS.  ; .com par‚metros de arquivamento.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ARCHIVE.PARAMETERS.  ; .com par√¢metros de arquivamento.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .AS.  ; .como.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .AS.TEXT. ; .como texto.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ASSIGN.  ; .Associar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .AT.  ; .Ao.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .AT.END.  ; .No ˙ltimo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .AT.LAST. ; .No ˙litmo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .AT.END.  ; .No √∫ltimo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .AT.LAST. ; .No √∫litmo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .AT.NEW.  ; .No primeiro.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .BINARY.SEARCH. ; .utilizando pesquisa bin·ria.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .BINARY.SEARCH. ; .utilizando pesquisa bin√°ria.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .BLUE.  ; .azul.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .BY.  ; .por.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CALL.  ; .Chamar/Executar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .CALL.METHOD. ; .Chamar o mÈtodo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .CASE.  ; .Verificar conte˙do de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .CHAIN. ; .processar em sequÍncia.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .CHANGING.  ; .atualizando par‚metro.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .CALL.METHOD. ; .Chamar o m√©todo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .CASE.  ; .Verificar conte√∫do de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .CHAIN. ; .processar em sequ√™ncia.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .CHANGING.  ; .atualizando par√¢metro.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CHECK. ; .Para continuar, verifique se.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CLEAR. ; .Inicializar conteudo de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CLEAR:.  ; .Limpar:.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3148,33 +3148,33 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .COMMIT.WORK. ; .Efetivar dados na Base.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .COMPUTE. ; .Calcular.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CONCATENATE. ; .Concatenar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .COPIES.  ; .cÛpias.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .COPIES.  ; .c√≥pias.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CORRESPONDING. ; .Correspondente a.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .COVER.TEXT.  ; .com tÌtulo de fila.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .COVER.TEXT.  ; .com t√≠tulo de fila.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CPI. ; .caracteres por inch.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CREATE.  ; .criar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .CREATE.OBJECT. ; .Criar o objeto.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .DATASET.EXPIRATION.  ; .com data de expiraÁ„o do dataset.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .DATASET.EXPIRATION.  ; .com data de expira√ß√£o do dataset.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DELETE.  ; .Eliminar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DEPARTMENT.  ; .nome do departamento.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DESCRIBE.  ; .Retornar os atributos de.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .DESCRIBE.DISTANCE.BETWEEN. ; .Determinar a dist‚ncia entre .'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .DESCRIBE.DISTANCE.BETWEEN. ; .Determinar a dist√¢ncia entre .'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DESCRIBE.FIELD.  ; .Retornar os atributos do campo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DESCRIBE.TABLE.  ; .Retornar os atributos da tabela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DESTINATION. ; .com destino.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .DO.  ; .Executar repetidamente.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ELSE.  ; .Sen„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ELSEIF.  ; .Se n„o, se.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ELSE.  ; .Sen√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ELSEIF.  ; .Se n√£o, se.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ENDAT. ; .Final do AT.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ENDCASE. ; .Fim da VerificaÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ENDCHAIN.  ; .finalizar sequÍncia.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ENDDO. ; .Fim da RepetiÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ENDCASE. ; .Fim da Verifica√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ENDCHAIN.  ; .finalizar sequ√™ncia.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ENDDO. ; .Fim da Repeti√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ENDIF. ; .Fim Se.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .ENDLOOP. ; .Fim do LaÁo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .ENDLOOP. ; .Fim do La√ßo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ENDSELECT. ; .Fim Selecionar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .EQ.  ; .igual.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .EXCEPTIONS.  ; .ExceÁıes.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .EXIT.FROM.STEP-LOOP. ; .Sair do laÁo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .EXCEPTIONS.  ; .Exce√ß√µes.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .EXIT.FROM.STEP-LOOP. ; .Sair do la√ßo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .EXTRACT. ; .extrair.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .FIELD. ; .o campo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .FIELDS.  ; .os campos.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3182,25 +3182,25 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .FOR. ; .para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .FOR.ALL.ENTRIES.IN.  ; .para todas as entradas na tabela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .FORMAT.  ; .formatar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .FREE.  ; .Inicializar/Liberar ·rea de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .FREE.MEMORY.ID.  ; .Liberar da memÛria a identificaÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .FREE:. ; .Liberar da memÛria:.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .FREE.  ; .Inicializar/Liberar √°rea de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .FREE.MEMORY.ID.  ; .Liberar da mem√≥ria a identifica√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .FREE:. ; .Liberar da mem√≥ria:.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .FROM.  ; .da/de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .FUNCTION.  ; .FunÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .FUNCTION.  ; .Fun√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .GE.  ; .maior igual que.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .GET. ; .obter da tabela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .GREEN. ; .verde.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .GT.  ; .maior que.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .HOTSPOT. ; .interativo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .I. ; .numÈrico inteiro.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .I. ; .num√©rico inteiro.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .IF.  ; .Se.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .IF.FOUND.  ; .se encontrado.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .IMMEDIATELY. ; .imprimindo imediatamente.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .IN.  ; .Em.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .IN.PROGRAM.  ; .no programa.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .INCLUDE. ; .Incluir Sub Programa.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .INDEX-LINE.  ; .com Ìndice de linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .INDEX. ; .pelo Ìndice.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .INDEX-LINE.  ; .com √≠ndice de linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .INDEX. ; .pelo √≠ndice.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .INNER.JOIN.  ; .juntando.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .INPUT. ; .entrada.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .INSERT.  ; .Inserir.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3208,55 +3208,55 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .INTO.  ; .Colocar resultado em,.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .INTO.TABLE.  ; .na tabela interna.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .INVERSE. ; .inverso.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .IS ; È'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .IS ; √©'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .IS.INITIAL.  ; .estiver com valor inicial.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .IS.NOT.INITIAL.  ; .N„o È inicial.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .KEEP.IN.SPOOL. ; .manter na fila apÛs impress„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .IS.NOT.INITIAL.  ; .N√£o √© inicial.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .KEEP.IN.SPOOL. ; .manter na fila ap√≥s impress√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LATE.  ; .por final.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LAYOUT.  ; .padr„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LAYOUT.  ; .padr√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LE.  ; .menor igual que.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LEAVE. ; .sair do modo chamado.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LEAVE.LIST-PROCESSING. ; .voltar do processamento de lista para a tela anterior.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND
   tl_selecao.
-  SPLIT   'C  ; .LEAVE.SCREEN.  ; .sair da tela e processar a prÛxima.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LEAVE.SCREEN.  ; .sair da tela e processar a pr√≥xima.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LEAVE.TO.LIST-PROCESSING.  ; .voltar para o processamento da lista.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LEFT.  ; .esquerda.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LEFT.MARGIN. ; .margem esquerda.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LINE-COUNT.  ; .linhas por p·gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LINE-COUNT.  ; .linhas por p√°gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LINE-SIZE. ; .tamanho da linha.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LINES. ; .com o n˙mero de linhas em.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LIST.AUTHORITY.  ; .com autorizaÁ„o requerida para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LINES. ; .com o n√∫mero de linhas em.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LIST.AUTHORITY.  ; .com autoriza√ß√£o requerida para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LIST.DATASET.  ; .com o dataset.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LIST.NAME. ; .com nome da lista.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LIST.NUMBER.OF.LINES.  ; .atributos da lista, n˙mero de linhas.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LIST.NUMBER.OF.PAGES.  ; .atributos da lista, n˙mero de p·ginas.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .LOOP.AT. ; .Montar LaÁo para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LIST.NUMBER.OF.LINES.  ; .atributos da lista, n√∫mero de linhas.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LIST.NUMBER.OF.PAGES.  ; .atributos da lista, n√∫mero de p√°ginas.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .LOOP.AT. ; .Montar La√ßo para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LPI. ; .letras por inch.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .LT.  ; .menor que.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .MESSAGE. ; .Emitir mensagem.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .MODIFY.  ; .Atualizar/Inserir dados de.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .MODULE.  ; .MÛdulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .MODULE.  ; .M√≥dulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .MOVE.  ; .Atribuir.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .MOVE:. ; .Atribuir.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .MULTIPLY.  ; .Multiplos.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .NE.  ; .diferente.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .NEW-PAGE.  ; .Nova p·gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .NEW-SECTION. ; .iniciar nova sess„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .NEW.LIST.IDENTIFICATION. ; .nova requisiÁ„o de fila.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .NO-HEADING . ; .sem cabeÁalho.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .NO-TITLE.  ; .sem tÌtulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .NEW-PAGE.  ; .Nova p√°gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .NEW-SECTION. ; .iniciar nova sess√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .NEW.LIST.IDENTIFICATION. ; .nova requisi√ß√£o de fila.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .NO-HEADING . ; .sem cabe√ßalho.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .NO-TITLE.  ; .sem t√≠tulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .NO.DIALOG. ; .omitindo tela de controle de impressora.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .NOT. ; .(n„o).'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .NOT. ; .(n√£o).'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .OFF. ; .desligado.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ON.  ; .ativado.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .ORDER.BY.  ; .organizando por.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .OUTER.JOIN.  ; .excluindo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .PARAMETERS.  ; .com par‚metros.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .PARAMETERS.  ; .com par√¢metros.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .PERFORM. ; .Chamar rotina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .PERFORM:.  ; .Chamar rotina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .PINK.  ; .rosa.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .POSITION.  ; .posiÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .PRINT-CONTROL. ; .determinar o controle de impress„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .POSITION.  ; .posi√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .PRINT-CONTROL. ; .determinar o controle de impress√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .PRINT.OFF. ; .liberar da fila.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .PRINT.ON.  ; .manter na fila.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .READ.  ; .Ler.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3264,7 +3264,7 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .RECEIVER.  ; .com o recebedor.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .RED. ; .vermelho.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .REFRESH. ; .Reinicializar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .REFRESH:.  ; .Eliminar da memÛria:.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .REFRESH:.  ; .Eliminar da mem√≥ria:.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .RETURN.  ; .Retornar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .RETURN.TO.SCREEN.  ; .voltar para a tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .RIGHT. ; .direita.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3273,10 +3273,10 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .SEPARATED. ; .separado.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SET.BLANK.LINES.OFF. ; .Desativar o uso de linhas em branco.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SET.BLANK.LINES.ON.  ; .Ativar o uso de linhas em branco.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SET.HOLD.DATA.OFF. ; .Desativar valores padr„o para a tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SET.HOLD.DATA.ON.  ; .Ativar valores padr„o para a tela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SET.MARGIN.  ; .definir a margem de impress„o na tela para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SET.SCREEN.  ; .setar o n˙mero da prÛxima tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SET.HOLD.DATA.OFF. ; .Desativar valores padr√£o para a tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SET.HOLD.DATA.ON.  ; .Ativar valores padr√£o para a tela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SET.MARGIN.  ; .definir a margem de impress√£o na tela para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SET.SCREEN.  ; .setar o n√∫mero da pr√≥xima tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SIZE.  ; .tamanho do script.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SKIP.  ; .pular linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SORT.  ; .Ordenar conteudo de.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3284,11 +3284,11 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .SUBMIT.  ; .enviar.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SUBSCREEN. ; .sub-tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SUM. ; .Sumarizar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SUPPRESS.DIALOG. ; .Suprimir a saÌda da tela corrente.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SY-COLNO.  ; .n˙mero da coluna em que o cursor est· posicionado.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SY-LINCT.  ; .n˙mero de linhas por p·gina da lista corrente.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SY-LINNO.  ; .n˙mero corrente da linha.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .SY-PAGNO.  ; .n˙mero corrente da p·gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SUPPRESS.DIALOG. ; .Suprimir a sa√≠da da tela corrente.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SY-COLNO.  ; .n√∫mero da coluna em que o cursor est√° posicionado.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SY-LINCT.  ; .n√∫mero de linhas por p√°gina da lista corrente.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SY-LINNO.  ; .n√∫mero corrente da linha.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .SY-PAGNO.  ; .n√∫mero corrente da p√°gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .SY-SUBRC.  ; .Retorno de erro do sistema.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .TIMES. ; .vezes.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .TO.  ; .para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3297,32 +3297,32 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'C  ; .ULINE. ; .imprimir linha horizontal.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .UNASSIGN.  ; .Desassociar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .UNASSIGN:. ; .Desassociar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .USING. ; .utilizando o par‚metro.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .USING. ; .utilizando o par√¢metro.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .VLINE. ; .imprimir linha vertical.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .WAIT.  ; .Executar comando de espera.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .WHEN.  ; .Quando valor for.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .WHERE. ; .Onde o campo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .WITH-TITLE.  ; .com tÌtulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .WRITE. ; .imprimir no relatÛrio a linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'C  ; .WRITE:.  ; .imprimir no relatÛrio as linhas.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .WITH-TITLE.  ; .com t√≠tulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .WRITE. ; .imprimir no relat√≥rio a linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'C  ; .WRITE:.  ; .imprimir no relat√≥rio as linhas.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'C  ; .YELLOW.  ; .amarelo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .AS.  ; .como.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .BEGIN. ; .InÌcio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .BEGIN. ; .In√≠cio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .BLOCK. ; .bloco.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .COMMON.PART. ; .·rea comum.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .COMMON.PART. ; .√°rea comum.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .CONSTANTS. ; .Declarar a constante.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .CONSTANTS:.  ; .Declarar as constantes.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .CONTROLS.  ; .Definir o controle.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .CONTROLS:. ; .Definir os controles.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .DATA.  ; .Definir vari·vel.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .DATA:. ; .Definir as vari·veis.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .DATA.  ; .Definir vari√°vel.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .DATA:. ; .Definir as vari√°veis.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .DATA:.BEGIN.OF.  ; .Definir tabela interna.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .DECIMALS.  ; .com decimais.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .DEFAULT. ; .padr„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .DEFAULT. ; .padr√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .END. ; .Final.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .FIELD-GROUPS.  ; .grupo de campos.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .FOR. ; .para.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .HEADER.LINE. ; .linha de cabeÁalho.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .HEADER.LINE. ; .linha de cabe√ßalho.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .INITIAL.SIZE.  ; .tamanho inicial.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .INTERVALS. ; .intervalos.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .KEY. ; .chave.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
@@ -3332,80 +3332,80 @@ FORM ztge_source TABLES tl_selecao STRUCTURE t_source.
   SPLIT   'D  ; .NON-UNIQUE.  ; .chave composta.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .OCCURS.  ; .ocorrendo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .OF.  ; .de.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .PARAMETERS.  ; .Par‚metros de seleÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .PARAMETERS:. ; .Par‚metros de seleÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .PARAMETERS.  ; .Par√¢metros de sele√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .PARAMETERS:. ; .Par√¢metros de sele√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .RANGE. ; .intervalo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .RANGES.  ; .intervalo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .REPORT.  ; .RelatÛrio.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .REPORT.  ; .Relat√≥rio.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .SCREEN.  ; .tela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .SELECT-OPTIONS.  ; .Entrada de opÁıes.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .STANDARD.  ; .padr„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .STANDARD.PAGE.HEADING. ; .cabeÁalho padr„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .SELECT-OPTIONS.  ; .Entrada de op√ß√µes.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .STANDARD.  ; .padr√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .STANDARD.PAGE.HEADING. ; .cabe√ßalho padr√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .STATICS. ; .Declarar variavel local.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .STATICS.:. ; .Declarar variavel local.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .STRUCTURE. ; .estrutura.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TABLE. ; .tabela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TABLES.  ; .Declarar a seguinte tabela.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TABLES:. ; .Declarar as seguintes tabelas.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .TABLEVIEW. ; .vis„o de tabela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .TABLEVIEW. ; .vis√£o de tabela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TABSTRIP.  ; .aba de tela.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TYPE-POOLS.  ; .grupo de tipos.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TYPE.  ; .com as mesmas caracteristicas de.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TYPES. ; .Definir campo estruturado.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .TYPES:.  ; .Definir campo estruturado como segue.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .UNIQUE.  ; .chave ˙nica.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'D  ; .VALUE. ; .valor padr„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .UNIQUE.  ; .chave √∫nica.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'D  ; .VALUE. ; .valor padr√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'D  ; .WITH.  ; .com.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .AFTER.INPUT. ; .depois da entrada so usu·rio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .AT.SELECTION-SCREEN. ; .Na tela de seleÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .AT.USER-COMMAND. ; .Ao comando do usu·rio.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .AFTER.INPUT. ; .depois da entrada so usu√°rio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .AT.SELECTION-SCREEN. ; .Na tela de sele√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .AT.USER-COMMAND. ; .Ao comando do usu√°rio.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .BEFORE.OUTPUT. ; .antes da tela ser exibida.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .BEGIN.OF.BLOCK.  ; .inÌcio de bloco.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .BEGIN.OF.LINE. ; .inÌcio da linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .COMMENT. ; .descriÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .DURING.LINE-SELECTION. ; .quando gerado em uma lista secund·ria.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .END-OF-PAGE. ; .final da p·gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .BEGIN.OF.BLOCK.  ; .in√≠cio de bloco.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .BEGIN.OF.LINE. ; .in√≠cio da linha.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .COMMENT. ; .descri√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .DURING.LINE-SELECTION. ; .quando gerado em uma lista secund√°ria.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .END-OF-PAGE. ; .final da p√°gina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .END-OF-SELECTION.  ; .Fim do Processamento.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .END.OF.BLOCK.  ; .final do bloco.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .END.OF.LINE. ; .final da linha.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .FRAME.TITLE. ; .tÌtulo do frame.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .FRAME.TITLE. ; .t√≠tulo do frame.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .GROUP. ; .grupo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .INITIALIZATION.  ; .Rotina para InicializaÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .LINE-SELECTION.  ; .Linha de seleÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .INITIALIZATION.  ; .Rotina para Inicializa√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .LINE-SELECTION.  ; .Linha de sele√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .LOWER.CASE.  ; .caixa baixa.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .MODIF.ID.  ; .com identificaÁ„o de modificaÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .ON.HELP-REQUEST. ; .quando o usu·rio pressionar F1.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .ON.VALUE-REQUEST.  ; .quando o usu·rio pressionar F4.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .MODIF.ID.  ; .com identifica√ß√£o de modifica√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .ON.HELP-REQUEST. ; .quando o usu√°rio pressionar F1.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .ON.VALUE-REQUEST.  ; .quando o usu√°rio pressionar F4.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .ON.VALUE-REQUEST.FOR.  ; .quando for alterado o campo.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .PARAMETER:.  ; .Par‚metro de seleÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .PARAMETER:.  ; .Par√¢metro de sele√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .PROCESS. ; .Processar.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .RADIOBUTTON. ; .bot„o de r·dio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .SELECTION-SCREEN.  ; .Tela de seleÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .SELECTION-SCREEN.PUSHBUTTON. ; .Gerar um bot„o na tela de seleÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .SELECTION-SCREEN:. ; .Tela de seleÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .SELECTION-SCREEN:.PUSHBUTTON.  ; .Gerar um bot„o na tela de seleÁ„o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .RADIOBUTTON. ; .bot√£o de r√°dio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .SELECTION-SCREEN.  ; .Tela de sele√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .SELECTION-SCREEN.PUSHBUTTON. ; .Gerar um bot√£o na tela de sele√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .SELECTION-SCREEN:. ; .Tela de sele√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .SELECTION-SCREEN:.PUSHBUTTON.  ; .Gerar um bot√£o na tela de sele√ß√£o.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .START-OF-SELECTION.  ; .Inicio do Processamento.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'E  ; .TABBED.BLOCK.  ; .bloco de abas.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .TOP-OF-PAGE. ; .topo da p·gina.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .USER-COMMAND.  ; .comando do usu·rio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'E  ; .WITH.FRAME.TITLE.  ; .com o tÌtulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .TOP-OF-PAGE. ; .topo da p√°gina.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .USER-COMMAND.  ; .comando do usu√°rio.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'E  ; .WITH.FRAME.TITLE.  ; .com o t√≠tulo.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'R  ; .ENDFORM. ; .Fim da Rotina.'   AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'R  ; .EXPORTING. ; .Par‚metros de ExportaÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'R  ; .EXPORTING. ; .Par√¢metros de Exporta√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'R  ; .FORM.  ; .Rotina.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'R  ; .IMPORTING. ; .Par‚metros de ImportaÁ„o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'R  ; .IMPORTING. ; .Par√¢metros de Importa√ß√£o.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
   SPLIT   'R  ; .PERFORM. ; .Chamar rotina .'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
-  SPLIT   'R  ; .USING. ; .utilizando o par‚metro.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
+  SPLIT   'R  ; .USING. ; .utilizando o par√¢metro.'  AT ';'    INTO tl_selecao-tipo tl_selecao-comando tl_selecao-sentenca. CONDENSE: tl_selecao-tipo, tl_selecao-comando, tl_selecao-sentenca. APPEND tl_selecao.
 
 
 ENDFORM. "ztge_source
 *&---------------------------------------------------------------------*
-*  Para as rotinas n„o cabem as declaraÁıes de eventos.
+*  Para as rotinas n√£o cabem as declara√ß√µes de eventos.
 *----------------------------------------------------------------------*
 FORM z_seleciona_rotina.
 
 *Tabela local para selecionar os tipos de comandos.
-*N„o foi possivel selecionar direto na t_source porque a t_source tem
-*que ser do tipo string È assim n„o podemos fazer uma seleÁ„o de campos
+*N√£o foi possivel selecionar direto na t_source porque a t_source tem
+*que ser do tipo string √© assim n√£o podemos fazer uma sele√ß√£o de campos
 *diferentes.
 *  DATA: BEGIN OF tl_selecao OCCURS 0,
 *          tipo     LIKE zege_source-linha,
@@ -3442,15 +3442,15 @@ ENDFORM. " z_seleciona_rotina
 *&---------------------------------------------------------------------*
 *&      Form  z_traduz_codigos
 *&---------------------------------------------------------------------*
-* Rotina para traduzir os cÛdigos em PortuguÍs estruturado.
+* Rotina para traduzir os c√≥digos em Portugu√™s estruturado.
 *----------------------------------------------------------------------*
-*      -->t_entrada  ==> Tabela que contem o cÛdigo em si.
-*      -->t_retorno  ==> Tabela que retornara a traduÁ„o do cÛdigo.
+*      -->t_entrada  ==> Tabela que contem o c√≥digo em si.
+*      -->t_retorno  ==> Tabela que retornara a tradu√ß√£o do c√≥digo.
 *----------------------------------------------------------------------*
 FORM z_traduz_codigos TABLES t_entrada STRUCTURE t_source
                                t_retorno STRUCTURE t_source.
 
-* Vari·veis locais
+* Vari√°veis locais
   DATA: vl_tamanho TYPE i,
         "tamanho do campo que contem o comando da tabela t_source.
         vl_check   TYPE c,
@@ -3490,7 +3490,7 @@ FORM z_traduz_codigos TABLES t_entrada STRUCTURE t_source
     CHECK t_comando-text(1) NE '*'.
 
 
-**-- Desloca a primeira posiÁ„o deixando um branco
+**-- Desloca a primeira posi√ß√£o deixando um branco
     SHIFT t_comando-text RIGHT.
 
 **-- subtitui todos os brancos por pontos
@@ -3500,10 +3500,10 @@ FORM z_traduz_codigos TABLES t_entrada STRUCTURE t_source
     TRANSLATE t_comando-text TO UPPER CASE.
 
 
-**-- Substitui comando por sentenÁa
+**-- Substitui comando por senten√ßa
     LOOP AT t_source.
 
-*>> Este comando ser· utilizado na vers„o 4.7 do R/3
+*>> Este comando ser√° utilizado na vers√£o 4.7 do R/3
 **      REPLACE ALL OCCURRENCES
 **      OF
 **      t_replace-comando
@@ -3589,8 +3589,8 @@ FORM z_traduz_codigos TABLES t_entrada STRUCTURE t_source
     APPEND t_comando.
   ENDLOOP.   "tl_codigo
 
-**--Carregar a tabela t_retorno com o cÛdigo j· traduzido. Para que a
-*   tabela com o cÛdigo em si n„o se perca e a traduÁ„o fique em outra
+**--Carregar a tabela t_retorno com o c√≥digo j√° traduzido. Para que a
+*   tabela com o c√≥digo em si n√£o se perca e a tradu√ß√£o fique em outra
 *   tabela.
   t_retorno[] = t_comando[].
 
